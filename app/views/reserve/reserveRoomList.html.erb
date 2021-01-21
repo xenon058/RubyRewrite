@@ -1,0 +1,28 @@
+<main id="main">
+      <article>
+  <!-- 各ページスクリプト挿入場所 -->
+        <section>
+          <h2>空室検索</h2>
+          <h3><%= @date %>の空室一覧</h3>
+          <p><%= @rooms.count  %>部屋の空室があります</p>
+
+          <table>
+              <th>お部屋名称</th>
+              <th>お部屋タイプ</th>
+              <th>一泊料金<br>（部屋単位）</th>
+              <th colspan="2">お部屋イメージ</th>
+              <% @rooms.each do |room| %>
+              <tr>
+                  <td><%=room.name %></td>
+                  <td><%= room_type= RoomType.find_by(id: room.type_id)
+                      room_type.name%></td>
+
+                  <td class='number'>¥<%= room.dayfee%></td>
+                  <td><img class='small' src="/<%= room.main_image%>"></td>
+                  <td><%= link_to("選択","/reserve/#{room.no}/reserveDetail")%></td>
+              </tr>
+              <% end %>
+        </table>
+        </section>
+      </article>
+</main>

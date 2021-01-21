@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--<title>Yoyaku</title>-->
+    <title>JIKKYO PENSION</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <header id="header">
+    <div id="pr">
+      <p>部活・サークル等のグループ利用に最適！アットホームなペンション！</p>
+    </div>
+    <h1><a href="/"><img src="/logo.png" alt=""></a></h1>
+    <% if !session[:owner] %>
+    <div id="contact">
+      <h2>ご予約／お問い合わせ</h2>
+      <span class="tel">☎0120-000-000</span>
+    </div>
+    <% end%>
+  </header>
+    <% if flash[:notice] %>
+      <div class="flash">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+  <body>
+      <% if !session[:owner] %>
+      <nav id="menu">
+      <ul>
+        <li><%= link_to("ホーム","/")%></li>
+        <li><%= link_to("お部屋紹介","/room/roomList") %></li>
+        <li><%= link_to("ご予約","/reserve/reserveDay")%></li>
+      </ul>
+    </nav>
+  <% elsif session[:enter]%>
+  <nav id="menu">
+      <ul>
+    <li><%= link_to("本日","/owner/reserveList/today") %></li>
+    <li><%= link_to("本日以降","/owner/reserveList/after") %></li>
+    <li><%= link_to("過去","/owner/reserveList/before") %></li>
+      </ul>
+  </nav>
+  <%end%>
+    <div id="contents">
+    <%= yield %>
+    <% if !session[:owner]%>
+      <aside id="side">
+        <section>
+          <h2>ご予約</h2>
+          <ul>
+            <li><%= link_to("宿泊日入力","/reserve/reserveDay")%></li>
+          </ul>
+        </section>
+        <section>
+          <h2>お部屋紹介</h2>
+            <% @room_types.each do |room_type|%>
+                <ul>
+                <li><%= link_to(room_type.name,"/room/#{room_type.id}/roomList")%></li>
+                </ul>
+            <% end%>
+        </section>
+      </aside>
+    <div id="pageTop">
+      <a href="#top">ページのトップへ戻る</a>
+    </div>
+
+    <% end%>
+    </div>
+    <footer id="footer">
+      Copyright c 2016 Jikkyo Pension All Rights Reserved.
+    </footer>
+  </body>
+
+</html>

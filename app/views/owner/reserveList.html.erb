@@ -1,0 +1,37 @@
+
+<h2>予約管理画面<%= @disp %></h2>
+<% if @reserves.count != 0%>
+    <p>各行の削除ボタンを押すことで、予約情報を削除することができます。</p>
+    <table class="host">
+      <th>　宿泊日付　</th>
+      <th>チェックイン<br>予定時間</th>
+      <th>部屋番号</th>
+      <th>顧　客　名</th>
+      <th>代表者連絡先</th>
+      <th>利用人数</th>
+      <th>メッセージ</th>
+      <th></th>
+    <% @reserves.each do |reserve|%>
+    <% customer = Customer.find_by(id: reserve.customer_id)%>
+    <tr>
+    <% require 'date'
+    date = reserve.date%>
+    <td><%= reserve.date = date.strftime('%Y-%m-%d')%></td>
+    <td><%= reserve.checkin_time%></td>
+    <td><%= reserve.room_no%></td>
+    <td><%= customer.name%></td>
+    <td><%= customer.telno%><br><a href=<%= "mailto:#{customer.address}"%>><%= customer.address%></a></td>
+        <td><%= reserve.numbers%>人</td>
+        <td><%= reserve.message%></td>
+        <% if params[:disp] != "before"%>
+          <td><%= link_to("削除","/owner/#{reserve.id}/delete", {method: :post, class: "submit_a", data: { confirm: "#{customer.name}様の予約を削除します。よろしいですか？"}})%>
+          </td>
+        <%end%>
+    </tr>
+    <%end %>
+    </table>
+<%else%>
+    <p>指定された期間に予約はありません</p>
+<%end%>
+<br>
+<%= link_to("ログアウト", "/owner/logout", {method: :post, class: "submit_a"}) %>

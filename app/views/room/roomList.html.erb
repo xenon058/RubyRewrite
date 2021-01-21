@@ -1,0 +1,38 @@
+
+<body>
+<main id="main">
+      <article>
+        <section>
+
+              <h2>お部屋のご紹介</h2>
+        <%if @rooms.count != 0%>
+              <h3>自慢のお部屋をご紹介</h3>
+              <p>
+                和室・洋室・和洋室と、ご希望に沿った形でお部屋をお選び頂けます。
+              </p>
+              <table>
+                <th>お部屋名称</th>
+                <th>お部屋タイプ</th>
+                <th>一泊料金<br>（部屋単位）</th>
+                <th colspan="2">お部屋イメージ</th>
+                <% @rooms.each do |room|%>
+                  <tr>
+                  <td><%=room.name %></td>
+                  <td><%= room_type= RoomType.find_by(id: room.type_id)
+                      room_type.name%></td>
+
+                  <td class='number'>¥<%=room.dayfee %></td>
+                  <td><img class='small' src=<%= "/#{room.main_image}"%>></td>
+                  <td><%= link_to("詳細","/room/#{room.no}/roomDetail")%></td>
+                  </tr>
+
+                <% end%>
+                </table>
+        <%else%>
+                <b>ご指定のお部屋は只今準備ができておりません</b>
+        <%end%>
+
+        </section>
+      </article>
+    </main>
+</body>

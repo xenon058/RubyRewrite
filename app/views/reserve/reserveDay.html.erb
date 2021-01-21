@@ -1,0 +1,22 @@
+<!-- メイン：開始 -->
+    <main id="main">
+      <article>
+  <!-- 各ページスクリプト挿入場所 -->
+        <section>
+          <h2>空室検索</h2>
+          <h3>宿泊予定日入力</h3>
+          <% require'date'%>
+          <%=form_tag("/reserve/reserveRoomList",method: :get) do %>
+            <table>
+              <tr>
+                <th>宿泊予定日</th>
+                <td><input type="date" name="reserveDay"
+                           value="<%= Date.today%>"
+                           min="<%= Date.today %>"></td>
+              </tr>
+            </table>
+          <input class="submit_a" type="submit" value="空室検索">
+          <% end %>
+        </section>
+      </article>
+    </main>

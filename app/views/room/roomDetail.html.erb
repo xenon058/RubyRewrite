@@ -1,0 +1,34 @@
+<main id="main">
+   <article>
+     <section>
+       <h2>お部屋の詳細</h2>
+       <h3></h3>
+       <p>
+
+       </p>
+       <table>
+         <tr>
+           <td><img class="middle" src="/<%= @room.main_image%>"></td>
+           <td><img class="middle" src="/<%= @room.image1%>"></td>
+         </tr>
+         <tr>
+           <td><img class="middle" src="/<%= @room.image2%>"></td>
+           <td><img class="middle" src="/<%= @room.image3%>"></td>
+         </tr>
+       </table>
+       <br>
+       <table>
+         <th>お部屋タイプ</th>
+         <th>一泊料金<br>（部屋単位）</th>
+         <th>アメニティ</th>
+         <tr>
+           <td><%= room_type= RoomType.find_by(id: @room.type_id)
+               room_type.name%></td>
+           <td class="number">¥<%= @room.dayfee%></td>
+           <td><%= @room.amenity%></td>
+         </tr>
+       </table>
+       <br>
+     </section>
+   </article>
+ </main>

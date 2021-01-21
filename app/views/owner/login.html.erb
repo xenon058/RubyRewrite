@@ -1,0 +1,18 @@
+<h2>オーナーログイン画面</h2>
+<p>オーナーのIDとパスワードを入力してください。</p>
+<%=form_tag("/owner/enter") do %>
+<table class="host">
+<tr>
+  <th>オーナーID</th>
+  <td><input type="text" name="id"></td>
+</tr>
+<tr>
+  <th>パスワード</th>
+  <td><input type="password" name="pass"></td>
+</tr>
+</table>
+<% if @errmsg%>
+<span style ="color: red;"><%= @errmsg%></span>
+<%end%>
+<input class="submit_a" type="submit" value="ログイン">
+<% end%>
